@@ -1,7 +1,7 @@
 {
   "name": "@parthobepary/nuxt-meta-pixel",
-  "version": "1.0.5",
-  "description": "A lightweight Facebook/Meta Pixel package for Nuxt 4",
+  "version": "1.0.6",
+  "description": "Lightweight Facebook Meta Pixel for Nuxt 3/4 - GDPR consent, advanced matching, cookie validation, CAPI support",
   "license": "MIT",
   "type": "module",
   "author": {
@@ -68,6 +68,19 @@
     "pixel",
     "fbq",
     "conversion",
-    "marketing"
+    "marketing",
+    "nuxt3",
+    "nuxt4",
+    "vue",
+    "vuejs",
+    "gdpr",
+    "consent",
+    "capi",
+    "conversions-api",
+    "event-tracking",
+    "advanced-matching",
+    "fbclid",
+    "retargeting",
+    "ads"
   ]
 }
