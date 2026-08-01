@@ -30,7 +30,10 @@ export function useMetaPixel() {
   const testEventCode = options.testEventCode || ''
 
   const log = (...args: unknown[]) => {
-    if (debug) console.log('[MetaPixel]', ...args)
+    if (debug) {
+      const prefix = testEventCode ? `[MetaPixel:TEST]` : '[MetaPixel]'
+      console.log(prefix, ...args)
+    }
   }
 
   const warn = (...args: unknown[]) => {
@@ -228,7 +231,7 @@ export function useMetaPixel() {
   ): ServerPayload => {
     const { fbc, fbp } = getValidatedCookies(debug)
 
-    return {
+    const payload: ServerPayload = {
       event_name: eventName,
       event_id: eventId,
       event_time: Math.floor(Date.now() / 1000),
@@ -240,6 +243,12 @@ export function useMetaPixel() {
       },
       custom_data: params
     }
+
+    if (testEventCode) {
+      payload.test_event_code = testEventCode
+    }
+
+    return payload
   }
 
   // Consent Management

@@ -16,6 +16,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     disabled: false,
     debug: false,
+    testEventCode: '',
     consentMode: false,
     autoPageView: false,
     deferLoad: true,

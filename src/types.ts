@@ -52,6 +52,7 @@ export interface ServerPayload {
   event_id?: string
   event_time: number
   event_source_url: string
+  test_event_code?: string
   user_data: {
     fbc?: string | null
     fbp?: string | null
