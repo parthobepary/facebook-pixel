@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-meta-pixel",
+  "name": "@parthobepary/nuxt-meta-pixel",
   "version": "1.0.1",
   "description": "A lightweight Facebook/Meta Pixel package for Nuxt 4",
   "license": "MIT",
