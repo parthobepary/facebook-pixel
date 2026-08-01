@@ -6,7 +6,7 @@ import type {
   QueuedEvent,
   ServerPayload
 } from '../../types'
-import { getValidatedCookies, captureFbclid } from '../utils/validation'
+import { getValidatedCookies } from '../utils/validation'
 import {
   normalizeAndHash,
   hashValue as hashUtil,
@@ -276,8 +276,8 @@ export function useMetaPixel() {
     log('Consent revoked')
   }
 
-  // Ready State
-  const isReady = { value: isPixelLoaded }
+  // Ready State - use getter for reactive value
+  const isReady = { get value() { return isPixelLoaded } }
 
   const onReady = (callback: () => void) => {
     if (isPixelLoaded) {

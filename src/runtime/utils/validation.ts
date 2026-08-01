@@ -92,16 +92,20 @@ export function getValidatedCookies(debug: boolean = false): ValidatedCookies {
 export function captureFbclid(debug: boolean = false): void {
   if (typeof window === 'undefined') return
 
-  const url = new URL(window.location.href)
-  const fbclid = url.searchParams.get('fbclid')
+  try {
+    const url = new URL(window.location.href)
+    const fbclid = url.searchParams.get('fbclid')
 
-  if (fbclid) {
-    const fbc = `fb.1.${Date.now()}.${fbclid}`
-    setCookie('_fbc', fbc, {
-      maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
-      sameSite: 'lax',
-      secure: true
-    })
-    if (debug) console.log('[MetaPixel] Captured fbclid:', fbclid)
+    if (fbclid) {
+      const fbc = `fb.1.${Date.now()}.${fbclid}`
+      setCookie('_fbc', fbc, {
+        maxAge: 7 * 24 * 60 * 60,
+        sameSite: 'lax',
+        secure: true
+      })
+      if (debug) console.log('[MetaPixel] Captured fbclid:', fbclid)
+    }
+  } catch {
+    if (debug) console.warn('[MetaPixel] Failed to parse URL for fbclid')
   }
 }

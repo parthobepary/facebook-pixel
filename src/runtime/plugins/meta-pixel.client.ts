@@ -106,25 +106,17 @@ export default defineNuxtPlugin(() => {
     loadPixelSDK()
   } else {
     let loaded = false
+    const events = ['mousedown', 'keydown', 'touchstart', 'scroll']
+
     const load = () => {
       if (loaded) return
       loaded = true
+      events.forEach(e => window.removeEventListener(e, load))
       loadPixelSDK()
-
-      // Remove listeners
-      ;['mousedown', 'keydown', 'touchstart', 'scroll'].forEach(e => {
-        window.removeEventListener(e, load)
-      })
     }
 
-    // Load on user interaction
-    ;['mousedown', 'keydown', 'touchstart', 'scroll'].forEach(e => {
-      window.addEventListener(e, load, { once: true, passive: true })
-    })
-
-    // Or after timeout
+    events.forEach(e => window.addEventListener(e, load, { passive: true }))
     setTimeout(load, 3500)
-
     log('Deferred loading enabled')
   }
 

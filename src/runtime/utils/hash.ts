@@ -72,51 +72,36 @@ export async function normalizeAndHash(data: {
   external_id?: string
 }): Promise<HashedAdvancedMatchingData> {
   const result: HashedAdvancedMatchingData = {}
+  const promises: Promise<void>[] = []
 
   if (data.em) {
-    const normalized = normalizeEmail(data.em)
-    result.em = await sha256(normalized)
+    promises.push(sha256(normalizeEmail(data.em)).then(h => { result.em = h }))
   }
-
   if (data.ph) {
-    const normalized = normalizePhone(data.ph)
-    result.ph = await sha256(normalized)
+    promises.push(sha256(normalizePhone(data.ph)).then(h => { result.ph = h }))
   }
-
   if (data.fn) {
-    const normalized = normalizeName(data.fn)
-    result.fn = await sha256(normalized)
+    promises.push(sha256(normalizeName(data.fn)).then(h => { result.fn = h }))
   }
-
   if (data.ln) {
-    const normalized = normalizeName(data.ln)
-    result.ln = await sha256(normalized)
+    promises.push(sha256(normalizeName(data.ln)).then(h => { result.ln = h }))
   }
-
   if (data.ct) {
-    const normalized = normalizeCity(data.ct)
-    result.ct = await sha256(normalized)
+    promises.push(sha256(normalizeCity(data.ct)).then(h => { result.ct = h }))
   }
-
   if (data.st) {
-    const normalized = normalizeState(data.st)
-    result.st = await sha256(normalized)
+    promises.push(sha256(normalizeState(data.st)).then(h => { result.st = h }))
   }
-
   if (data.zp) {
-    const normalized = normalizeZip(data.zp)
-    result.zp = await sha256(normalized)
+    promises.push(sha256(normalizeZip(data.zp)).then(h => { result.zp = h }))
   }
-
   if (data.country) {
-    const normalized = normalizeCountry(data.country)
-    result.country = await sha256(normalized)
+    promises.push(sha256(normalizeCountry(data.country)).then(h => { result.country = h }))
   }
-
   if (data.external_id) {
-    // No normalization for external_id
-    result.external_id = await sha256(data.external_id)
+    promises.push(sha256(data.external_id).then(h => { result.external_id = h }))
   }
 
+  await Promise.all(promises)
   return result
 }
