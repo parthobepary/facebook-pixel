@@ -16,18 +16,17 @@ npm install @parthobepary/nuxt-meta-pixel
 
 ### nuxt.config.ts
 
-```ts
+```javascript
 export default defineNuxtConfig({
-  modules: ['@parthobepary/nuxt-meta-pixel'],
+  modules: ["@parthobepary/nuxt-meta-pixel"],
 
   metaPixel: {
     disabled: false,
     debug: false,
-    testEventCode: '',
     consentMode: false,
     autoPageView: false,
     deferLoad: true,
-    immediateLoadPaths: ['/payment', '/checkout', '/success']
+    immediateLoadPaths: ["/payment", "/checkout", "/success"]
   }
 })
 ```
@@ -67,14 +66,13 @@ Use `testEventCode` to test events in Meta Events Manager without affecting prod
 
 ### Configure Test Mode
 
-```ts
-// nuxt.config.ts
+```javascript
 export default defineNuxtConfig({
-  modules: ['@parthobepary/nuxt-meta-pixel'],
+  modules: ["@parthobepary/nuxt-meta-pixel"],
 
   metaPixel: {
     debug: true,
-    testEventCode: 'TEST12345'
+    testEventCode: "TEST12345"
   }
 })
 ```
@@ -119,7 +117,7 @@ const completePurchase = (order) => {
 
 Call `setAdvancedMatching()` once after user login. Package automatically normalizes and hashes data.
 
-```ts
+```javascript
 const { setAdvancedMatching } = useMetaPixel()
 
 const onLogin = async (user) => {
@@ -135,14 +133,14 @@ const onLogin = async (user) => {
 
 ### Consent Mode (GDPR/CCPA)
 
-```ts
+```javascript
 // nuxt.config.ts
 metaPixel: {
   consentMode: true
 }
 ```
 
-```ts
+```javascript
 const { grantConsent, revokeConsent } = useMetaPixel()
 
 const onAcceptCookies = () => {
@@ -156,7 +154,7 @@ const onRejectCookies = () => {
 
 ### Server-Side CAPI Integration
 
-```ts
+```javascript
 const { getValidatedCookies, prepareServerPayload } = useMetaPixel()
 
 const { fbc, fbp, isValid } = getValidatedCookies()
@@ -216,7 +214,7 @@ All methods accept `(params, eventId?)`.
 
 ## Event Parameters
 
-```ts
+```javascript
 interface MetaPixelParams {
   content_ids?: string[]
   content_name?: string
